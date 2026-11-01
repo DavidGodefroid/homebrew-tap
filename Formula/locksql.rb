@@ -5,23 +5,23 @@ class Locksql < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/DavidGodefroid/locksql/releases/download/v0.13.0/locksql_0.13.0_darwin_arm64.tar.gz"
-      sha256 "bd4e90f802f1ed8316f42a40b960eed4ad51b8501dfa5790b33eb2b37f505372"
+      url "https://github.com/DavidGodefroid/locksql/releases/download/v0.13.1/locksql_0.13.1_darwin_arm64.tar.gz"
+      sha256 "b063dc1990ffaa3d54a0337465f6c41a197f42e1caea5c32bbb7d88c77ffa1f2"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/locksql/releases/download/v0.13.0/locksql_0.13.0_darwin_amd64.tar.gz"
-      sha256 "051bda7b630a74a0d18105320e0bb4f6f73463caab1232065014e7fc29014d8f"
+      url "https://github.com/DavidGodefroid/locksql/releases/download/v0.13.1/locksql_0.13.1_darwin_amd64.tar.gz"
+      sha256 "5ecc1427f9e873f4c06e76729c0e49a010a37133b99a6f2c4da0257521216ae7"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/locksql/releases/download/v0.13.0/locksql_0.13.0_linux_arm64.tar.gz"
-      sha256 "5717fd94770e8e548859fd9e310e9b4e99514df941552c0dc8b9521ba9b24238"
+      url "https://github.com/DavidGodefroid/locksql/releases/download/v0.13.1/locksql_0.13.1_linux_arm64.tar.gz"
+      sha256 "0c0151cf8769d3592ffe09d9fbb3c4cc4cca7fdfa22c30fae38b0af36897663e"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/locksql/releases/download/v0.13.0/locksql_0.13.0_linux_amd64.tar.gz"
-      sha256 "08f49155e4f703a14518d0bb6d57959b095e72335187b2fbbeb1da7b8c707cd9"
+      url "https://github.com/DavidGodefroid/locksql/releases/download/v0.13.1/locksql_0.13.1_linux_amd64.tar.gz"
+      sha256 "ec9c9aed502a0b89bf6b89db0203b9c2acc32115c7f2e6d0fd1100f24d4493b5"
     end
   end
 
@@ -30,8 +30,8 @@ class Locksql < Formula
     # scripts/install.sh installs it. It runs the release images by the
     # digests below, verified with cosign when the formula was bumped
     # (scripts/bump). The binary of the archive is the one of the image.
-    image_digest = "sha256:d4e53412ef04d87d309aabb0fb98e33eb29f151cab3e1b8e420332e9aa2e2781"
-    vault_image_digest = "sha256:667ca84e7d03d3f210504e87ede7bf4ceef0f992f5f6b549f243bc0db1b1a0ac"
+    image_digest = "sha256:5b18545fa4fb9d5bed1008a127628b59deae8194b74d92e226ae436f144bb90f"
+    vault_image_digest = "sha256:77131a34b4272440a6247ffa7b4bdb2282a8913fd641ca43a6fa437d88de7573"
     inreplace "scripts/locksql" do |s|
       s.gsub!(/^launcher_version=dev$/, "launcher_version=#{version}")
       s.gsub!(/^image_digest=$/, "image_digest=#{image_digest}")
