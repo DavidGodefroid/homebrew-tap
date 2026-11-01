@@ -45,7 +45,8 @@ class Locksql < Formula
       locksql runs in Docker: Docker Engine (Linux) or Docker Desktop (macOS)
       must be installed and running.
       Next step:
-        lox init
+        lox add locksql
+      (with lea: run lea first; it starts the hub)
       Upgrade with `brew upgrade locksql`, not `locksql update`.
     EOS
   end

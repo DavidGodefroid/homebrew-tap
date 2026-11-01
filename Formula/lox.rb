@@ -34,7 +34,12 @@ class Lox < Formula
       The Lock Family runs in Docker: Docker Engine (Linux) or Docker Desktop
       (macOS) must be installed and running.
       Next step:
-        lox init
+        lea
+        lox add locksql
+      One `lox add` per source: locksql, lockmq, lockfile or lockhttp. A lock
+      added while lea runs needs `lea stop`, then `lea`.
+      Without lea: `lox init`, then `lox add <lock>`, then `claude` +
+      `lox approve`.
     EOS
   end
 

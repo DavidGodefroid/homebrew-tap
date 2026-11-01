@@ -51,7 +51,8 @@ class Lockfile < Formula
     <<~EOS
       lockfile runs in Docker: Docker Engine must be installed and running.
       Next step:
-        lox init
+        lox add lockfile
+      (with lea: run lea first; it starts the hub)
       Upgrade with `brew upgrade lockfile`, not `lockfile update`.
     EOS
   end
