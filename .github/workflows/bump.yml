@@ -28,9 +28,12 @@ on:
 permissions:
   contents: read
 
-# One bump at a time: each one fast-forwards main.
+# One bump at a time per formula. A group keeps a single pending run, so a
+# shared group would cancel the bumps of other formulas sent at the same time
+# (several projects releasing together); per formula, only an older pending
+# bump of the same formula is replaced by the newer one.
 concurrency:
-  group: bump
+  group: bump-${{ github.event.inputs.formula || github.event.client_payload.formula }}
   cancel-in-progress: false
 
 jobs:
@@ -105,11 +108,28 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      # A fast-forward only: if main moved meanwhile, this fails; run the
-      # bump again.
-      - name: Fast-forward main
+      # The tested commit changes one formula file only. If main moved
+      # meanwhile (another formula's bump), replay it on top: a bump of
+      # another formula touches another file, so the replay cannot conflict;
+      # a conflict means main changed this formula, and the run fails.
+      - name: Publish onto main
         run: |
+          git config user.name DavidG
+          git config user.email davidgodefroid@gmail.com
           git fetch origin "$SHA"
-          git merge --ff-only "$SHA"
-          git push origin HEAD:main
-          git push origin --delete "$BRANCH"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --quiet --hard origin/main
+            if git merge-base --is-ancestor HEAD "$SHA"; then
+              git merge --quiet --ff-only "$SHA"
+            else
+              git cherry-pick "$SHA"
+            fi
+            if git push origin HEAD:main; then
+              git push origin --delete "$BRANCH"
+              exit 0
+            fi
+            sleep $((attempt * 5))
+          done
+          echo "could not publish onto main after 5 attempts" >&2
+          exit 1
