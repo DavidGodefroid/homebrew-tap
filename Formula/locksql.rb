@@ -51,10 +51,10 @@ class Locksql < Formula
   end
 
   test do
-    # Prints the launcher's version, then asks Docker for the image's: the
-    # second part needs Docker, which a test cannot count on.
+    # Prints the launcher's version, then asks Docker for the image's. Docker
+    # points nowhere here, so that part fails (exit 1) and pulls nothing.
     ENV["DOCKER_HOST"] = "unix://#{testpath}/no-docker.sock"
     assert_match "locksql launcher #{version} (image ghcr.io/davidgodefroid/locksql@sha256:",
-                 shell_output("#{bin}/locksql version 2>&1", nil)
+                 shell_output("#{bin}/locksql version 2>&1", 1)
   end
 end
