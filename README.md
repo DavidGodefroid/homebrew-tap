@@ -6,8 +6,11 @@ for macOS and Linux (Homebrew on Linux).
 ```sh
 brew trust davidgodefroid/tap
 brew install davidgodefroid/tap/lockfamily
-lox init
+lea
+lox add locksql
 ```
+
+Without lea: `lox init`, then `lox add <lock>`, then `claude` + `lox approve`.
 
 Homebrew asks you to trust a third-party tap once before it loads its
 formulas. Naming a formula in `brew install` trusts that formula only, not
