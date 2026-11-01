@@ -8,10 +8,10 @@
 #
 # It downloads the release's checksums.txt and its Sigstore bundle, checks
 # with cosign that checksums.txt was signed by the project's release
-# workflow run for that very tag, then rewrites Formula/FORMULA.rb: the
-# version, the sha256 of every archive the formula names (the URLs hold
-# #{version}, so they follow), and, for a formula that pins its images, the
-# image digests, each verified with cosign against the same workflow.
+# workflow run for that very tag, then rewrites Formula/FORMULA.rb: every
+# archive URL (the formula's version is the one Homebrew reads from them) and
+# its sha256, and, for a formula that pins its images, the image digests,
+# each verified with cosign against the same workflow.
 # An archive the formula names but the release lacks is an error.
 #
 # --dry-run prints the diff and leaves the formula as it is. Without it, the
@@ -108,10 +108,12 @@ if [ "$images" = vault ]; then
 	say "cosign: $registry:$version-vault is $vdigest"
 fi
 
-# The rewrite: the version line; after each url line, its sha256 line gets
-# the checksum of that archive (the url's last segment, #{version} expanded);
-# the image_digest and vault_image_digest assignments get the digests.
-awk -v version="$version" -v digest="$digest" -v vdigest="$vdigest" -v sums="$tmp/checksums.txt" '
+# The rewrite: each url line of the project's releases moves to the new tag
+# and archive name (vOLD/name_OLD_os_arch -> vNEW/name_NEW_os_arch), and the
+# sha256 line after it gets the checksum of that archive; the image_digest and
+# vault_image_digest assignments get the digests.
+awk -v version="$version" -v digest="$digest" -v vdigest="$vdigest" -v sums="$tmp/checksums.txt" \
+	-v prefix="https://github.com/DavidGodefroid/$repo/releases/download/v" '
 BEGIN {
 	while ((getline line < sums) > 0) {
 		n = split(line, f, /[ \t]+/)
@@ -122,14 +124,24 @@ BEGIN {
 	err = 0
 }
 function fail(msg) { printf "bump: %s\n", msg > "/dev/stderr"; err = 1 }
-/^  version "[^"]*"$/ { sub(/"[^"]*"/, "\"" version "\""); seen_version = 1 }
+# replace(s, from, to): s with its first literal occurrence of from replaced.
+function replace(s, from, to,    i) {
+	i = index(s, from)
+	if (i == 0) return s
+	return substr(s, 1, i - 1) to substr(s, i + length(from))
+}
 /^ *url "/ {
 	u = $0
 	sub(/^ *url "/, "", u)
 	sub(/".*$/, "", u)
-	asset = u
-	sub(/.*\//, "", asset)
-	gsub(/#\{version\}/, version, asset)
+	if (index(u, prefix) != 1) { fail("line " NR ": " u " is not a release of the project"); next }
+	rest = substr(u, length(prefix) + 1)
+	slash = index(rest, "/")
+	old = substr(rest, 1, slash - 1)
+	asset = substr(rest, slash + 1)
+	if (old == "" || index(asset, "_" old "_") == 0) { fail("line " NR ": cannot find the version in " u); next }
+	asset = replace(asset, "_" old "_", "_" version "_")
+	$0 = replace($0, u, prefix version "/" asset)
 	pending = asset
 }
 /^ *sha256 "[0-9a-f]+"$/ {
@@ -150,7 +162,6 @@ function fail(msg) { printf "bump: %s\n", msg > "/dev/stderr"; err = 1 }
 }
 { print }
 END {
-	if (!seen_version) fail("no version line (  version \"X.Y.Z\")")
 	if (urls == 0) fail("no url/sha256 pair")
 	if (digest != "" && digests == 0) fail("the formula pins no image digest, but its project publishes images")
 	exit err

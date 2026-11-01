@@ -1,27 +1,26 @@
 class Lockmq < Formula
   desc "Human-approved, PII-masking RabbitMQ gateway for AI agents"
   homepage "https://github.com/DavidGodefroid/lockmq"
-  version "0.5.0"
   license "Apache-2.0"
 
   on_macos do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockmq/releases/download/v#{version}/lockmq_#{version}_darwin_arm64.tar.gz"
+      url "https://github.com/DavidGodefroid/lockmq/releases/download/v0.5.0/lockmq_0.5.0_darwin_arm64.tar.gz"
       sha256 "3c270515996b231df1e0cc5015c83818f8abe2bc26a42d3efef12f0e7e055001"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockmq/releases/download/v#{version}/lockmq_#{version}_darwin_amd64.tar.gz"
+      url "https://github.com/DavidGodefroid/lockmq/releases/download/v0.5.0/lockmq_0.5.0_darwin_amd64.tar.gz"
       sha256 "609a872506edf69259cabd6fff4b798f4a7ffd3c537bb6e930787d5ab92e1b71"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockmq/releases/download/v#{version}/lockmq_#{version}_linux_arm64.tar.gz"
+      url "https://github.com/DavidGodefroid/lockmq/releases/download/v0.5.0/lockmq_0.5.0_linux_arm64.tar.gz"
       sha256 "98a9f65a0c672cdb418dc426b8c4b7caf29ccd98fdad39355744038c74c64389"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockmq/releases/download/v#{version}/lockmq_#{version}_linux_amd64.tar.gz"
+      url "https://github.com/DavidGodefroid/lockmq/releases/download/v0.5.0/lockmq_0.5.0_linux_amd64.tar.gz"
       sha256 "fe602fb5c23cd2bc08bb5205f4059173f256377887630a658a390f87e70abf02"
     end
   end

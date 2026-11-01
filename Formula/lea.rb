@@ -1,7 +1,6 @@
 class Lea < Formula
   desc "Run many Claude Code agents in containers, away from your machine"
   homepage "https://github.com/DavidGodefroid/lea"
-  version "0.3.5"
   license "Apache-2.0"
 
   # The Linux archives ship their own tmux (build/tmux); the macOS ones do not.
@@ -9,22 +8,22 @@ class Lea < Formula
     depends_on "tmux"
 
     on_arm do
-      url "https://github.com/DavidGodefroid/lea/releases/download/v#{version}/lea_#{version}_darwin_arm64.tar.gz"
+      url "https://github.com/DavidGodefroid/lea/releases/download/v0.3.5/lea_0.3.5_darwin_arm64.tar.gz"
       sha256 "acb9a236c8cedf79dab5481939419007043e0fe8e0431e43887ed79fb0c5232f"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lea/releases/download/v#{version}/lea_#{version}_darwin_amd64.tar.gz"
+      url "https://github.com/DavidGodefroid/lea/releases/download/v0.3.5/lea_0.3.5_darwin_amd64.tar.gz"
       sha256 "7d032ed89a7642c85d697a3730b08b290b48d0b03218b921f497d9c7a0a9051f"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/lea/releases/download/v#{version}/lea_#{version}_linux_arm64.tar.gz"
+      url "https://github.com/DavidGodefroid/lea/releases/download/v0.3.5/lea_0.3.5_linux_arm64.tar.gz"
       sha256 "c9ff97fa3c928114bb6130af7a29d9bf7903107b5dea284c7c72612b078596fa"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lea/releases/download/v#{version}/lea_#{version}_linux_amd64.tar.gz"
+      url "https://github.com/DavidGodefroid/lea/releases/download/v0.3.5/lea_0.3.5_linux_amd64.tar.gz"
       sha256 "69e812d3510eecd49a5e1b83e10b7b23c93f7746bb0e838fda365110f03b628d"
     end
   end

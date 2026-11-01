@@ -39,8 +39,8 @@ installation).
 
 1. it downloads the release's `checksums.txt` and checks with cosign that it
    was signed by the project's release workflow run for that very tag;
-2. it sets the formula's `version` and the `sha256` of every archive the
-   formula names (the URLs hold `#{version}`);
+2. it moves every archive URL of the formula to the new release (Homebrew
+   reads the formula's version from them) and sets each `sha256`;
 3. for a launcher, it verifies the release images with cosign and pins their
    digests.
 

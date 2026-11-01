@@ -1,27 +1,26 @@
 class Locksql < Formula
   desc "Human-approved, PII-masking database gateway for AI agents"
   homepage "https://github.com/DavidGodefroid/locksql"
-  version "0.12.0"
   license "Apache-2.0"
 
   on_macos do
     on_arm do
-      url "https://github.com/DavidGodefroid/locksql/releases/download/v#{version}/locksql_#{version}_darwin_arm64.tar.gz"
+      url "https://github.com/DavidGodefroid/locksql/releases/download/v0.12.0/locksql_0.12.0_darwin_arm64.tar.gz"
       sha256 "bf2386d033c917722a774573f07faf55b35a135f0677de434bc2cdb1abf09272"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/locksql/releases/download/v#{version}/locksql_#{version}_darwin_amd64.tar.gz"
+      url "https://github.com/DavidGodefroid/locksql/releases/download/v0.12.0/locksql_0.12.0_darwin_amd64.tar.gz"
       sha256 "2428199e05912959c339115c9ba8ba922d952bf888435159608ad06cac1169d4"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/locksql/releases/download/v#{version}/locksql_#{version}_linux_arm64.tar.gz"
+      url "https://github.com/DavidGodefroid/locksql/releases/download/v0.12.0/locksql_0.12.0_linux_arm64.tar.gz"
       sha256 "6dd93071a0e244e2240d24a79ea6a9216106b806de01d50d36af1e74518c6a85"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/locksql/releases/download/v#{version}/locksql_#{version}_linux_amd64.tar.gz"
+      url "https://github.com/DavidGodefroid/locksql/releases/download/v0.12.0/locksql_0.12.0_linux_amd64.tar.gz"
       sha256 "90508455b9565f5afacded9f12e24aaf10c77c784791d4292d448c5e0ca8db21"
     end
   end

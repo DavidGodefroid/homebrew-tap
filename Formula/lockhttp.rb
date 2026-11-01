@@ -1,27 +1,26 @@
 class Lockhttp < Formula
   desc "Human-approved HTTP(S) egress proxy for AI agents"
   homepage "https://github.com/DavidGodefroid/lockhttp"
-  version "0.6.0"
   license "Apache-2.0"
 
   on_macos do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v#{version}/lockhttp_#{version}_darwin_arm64.tar.gz"
+      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.6.0/lockhttp_0.6.0_darwin_arm64.tar.gz"
       sha256 "aa1e96b1e11e828c0439752d829740ac2eeba629c25c5d390a6246756a63d589"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v#{version}/lockhttp_#{version}_darwin_amd64.tar.gz"
+      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.6.0/lockhttp_0.6.0_darwin_amd64.tar.gz"
       sha256 "387ea400e4906e94aaed8e5da1605d3f9faea7ddc48227498909dbc02d8827d1"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v#{version}/lockhttp_#{version}_linux_arm64.tar.gz"
+      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.6.0/lockhttp_0.6.0_linux_arm64.tar.gz"
       sha256 "f53ba0142d54c5ee8fd431f722b8b5ca041d59400146daf3be230335ef574f83"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v#{version}/lockhttp_#{version}_linux_amd64.tar.gz"
+      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.6.0/lockhttp_0.6.0_linux_amd64.tar.gz"
       sha256 "deefea22cd93818804f1d5abc3b2d46ef822223180a12e5b685dbbb834ec340c"
     end
   end
