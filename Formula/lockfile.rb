@@ -6,6 +6,19 @@ class Lockfile < Formula
 
   depends_on :linux
 
+  # Linux only (depends_on :linux); the macOS archives are named so that the
+  # formula still loads on macOS, as Homebrew requires.
+  on_macos do
+    on_arm do
+      url "https://github.com/DavidGodefroid/lockfile/releases/download/v#{version}/lockfile_#{version}_darwin_arm64.tar.gz"
+      sha256 "223cc61ed1266730b6ccfba56aa5a723cb28c481c2809d87fdb136ebc51c2801"
+    end
+    on_intel do
+      url "https://github.com/DavidGodefroid/lockfile/releases/download/v#{version}/lockfile_#{version}_darwin_amd64.tar.gz"
+      sha256 "9632dfcad84e6ecbc04fe4fc00ac42b29860d412fa6492ebf9568123e3fa5cd3"
+    end
+  end
+
   on_linux do
     on_arm do
       url "https://github.com/DavidGodefroid/lockfile/releases/download/v#{version}/lockfile_#{version}_linux_arm64.tar.gz"
