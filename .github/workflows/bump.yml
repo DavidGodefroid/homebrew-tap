@@ -1,0 +1,115 @@
+name: bump
+
+# Bumps one formula to a published release of its project:
+#   - by hand: Actions > bump > Run workflow (formula, version);
+#   - from a project's release workflow: a repository_dispatch of type
+#     "bump" with the payload {"formula": "...", "version": "vX.Y.Z"},
+#     sent with a token allowed to dispatch to this repository only.
+# scripts/bump.sh rewrites the formula from the release's signed
+# checksums.txt (and verified image digests); the result is pushed to a bump
+# branch, tested by tests.yml, then fast-forwarded onto main. Commits are made
+# with this repository's GITHUB_TOKEN.
+
+on:
+  workflow_dispatch:
+    inputs:
+      formula:
+        description: Formula to bump
+        required: true
+        type: choice
+        options: [lox, lea, locksql, lockmq, lockfile, lockhttp, locklog]
+      version:
+        description: Release version (X.Y.Z or vX.Y.Z)
+        required: true
+        type: string
+  repository_dispatch:
+    types: [bump]
+
+permissions:
+  contents: read
+
+# One bump at a time: each one fast-forwards main.
+concurrency:
+  group: bump
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+      branch: ${{ steps.commit.outputs.branch }}
+      sha: ${{ steps.commit.outputs.sha }}
+    env:
+      FORMULA: ${{ github.event.inputs.formula || github.event.client_payload.formula }}
+      VERSION: ${{ github.event.inputs.version || github.event.client_payload.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+
+      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+        with:
+          cosign-release: v3.0.6
+
+      # bump.sh checks FORMULA and VERSION against fixed patterns before
+      # using them, as they may come from a dispatch payload.
+      - name: Rewrite the formula
+        run: scripts/bump.sh "$FORMULA" "$VERSION"
+
+      - name: Commit to a bump branch
+        id: commit
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >>"$GITHUB_OUTPUT"
+            echo "$FORMULA is already at $VERSION" >>"$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git config user.name DavidG
+          git config user.email davidgodefroid@gmail.com
+          version=${VERSION#v}
+          git commit --quiet -am "feat($FORMULA): bump to $version" \
+            -m "From the signed checksums.txt of the $FORMULA release v$version."
+          branch="bump/$FORMULA-$version"
+          git push --force origin "HEAD:refs/heads/$branch"
+          {
+            echo "changed=true"
+            echo "branch=$branch"
+            echo "sha=$(git rev-parse HEAD)"
+          } >>"$GITHUB_OUTPUT"
+          git show --stat HEAD >>"$GITHUB_STEP_SUMMARY"
+
+  test:
+    needs: bump
+    if: needs.bump.outputs.changed == 'true'
+    permissions:
+      contents: read
+    uses: ./.github/workflows/tests.yml
+    with:
+      ref: ${{ needs.bump.outputs.sha }}
+
+  publish:
+    needs: [bump, test]
+    if: needs.bump.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      BRANCH: ${{ needs.bump.outputs.branch }}
+      SHA: ${{ needs.bump.outputs.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+
+      # A fast-forward only: if main moved meanwhile, this fails; run the
+      # bump again.
+      - name: Fast-forward main
+        run: |
+          git fetch origin "$SHA"
+          git merge --ff-only "$SHA"
+          git push origin HEAD:main
+          git push origin --delete "$BRANCH"

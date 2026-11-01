@@ -1,0 +1,78 @@
+name: tests
+
+# Style and strict audit of the tap, then each formula installed from source
+# and tested, on Linux and on macOS (arm64). bump.yml calls it on a bump
+# branch before the bump reaches main.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        description: Commit or branch of the tap to test (default the triggering commit)
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.workflow_ref }}-${{ inputs.ref || github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash -xeuo pipefail {0}
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@eb02c69dbabdb66ff183c614f4ce7ab3c077592c # 2026.10.12.1
+        with:
+          token: ${{ github.token }}
+
+      - name: Check out the ref to test
+        if: inputs.ref != ''
+        working-directory: ${{ steps.set-up-homebrew.outputs.repository-path }}
+        env:
+          REF: ${{ inputs.ref }}
+        run: |
+          git fetch origin "$REF"
+          git checkout --force --detach FETCH_HEAD
+          git log -1 --oneline
+
+      - run: brew test-bot --only-cleanup-before
+
+      - run: brew test-bot --only-setup
+
+      - run: brew test-bot --only-tap-syntax
+
+      - name: Strict audit
+        run: brew audit --strict --online --tap davidgodefroid/tap
+
+      - name: Install and test each formula
+        run: |
+          formulas=(lox lea locksql lockmq lockhttp)
+          if [[ "$RUNNER_OS" == Linux ]]; then formulas+=(lockfile); fi
+          for f in "${formulas[@]}"; do
+            brew install --build-from-source --formula "davidgodefroid/tap/$f"
+            brew test --verbose "davidgodefroid/tap/$f"
+          done
+
+      - name: Install and test the meta formula
+        run: |
+          brew install --formula davidgodefroid/tap/lockfamily
+          brew test --verbose davidgodefroid/tap/lockfamily
+          lox version
+          lea version
+          cosign version
