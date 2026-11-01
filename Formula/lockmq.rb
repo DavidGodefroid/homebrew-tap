@@ -45,7 +45,8 @@ class Lockmq < Formula
       lockmq runs in Docker: Docker Engine (Linux) or Docker Desktop (macOS)
       must be installed and running.
       Next step:
-        lox init
+        lox add lockmq
+      (with lea: run lea first; it starts the hub)
       Upgrade with `brew upgrade lockmq`, not `lockmq update`.
     EOS
   end

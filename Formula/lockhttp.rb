@@ -43,7 +43,8 @@ class Lockhttp < Formula
       lockhttp runs in Docker: Docker Engine (Linux) or Docker Desktop (macOS)
       must be installed and running.
       Next step:
-        lox init
+        lox add lockhttp
+      (with lea: run lea first; it starts the hub)
       Upgrade with `brew upgrade lockhttp`, not `lockhttp update`.
     EOS
   end

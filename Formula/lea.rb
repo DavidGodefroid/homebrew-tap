@@ -43,7 +43,9 @@ class Lea < Formula
       lea runs its agents in Docker: Docker Engine (Linux) or Docker Desktop
       (macOS) must be installed and running.
       Next step:
-        lox init
+        lea
+      Add a source with `lox add locksql` (or lockmq, lockfile, lockhttp); a
+      lock added while lea runs needs `lea stop`, then `lea`.
       Upgrade lea with `brew upgrade lea`: its background self-update is off
       in this installation.
     EOS
