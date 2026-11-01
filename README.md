@@ -10,6 +10,8 @@ lea
 lox add locksql
 ```
 
+A lock added while lea runs reaches it after `lea stop`, then `lea`.
+
 Without lea: `lox init`, then `lox add <lock>`, then `claude` + `lox approve`.
 
 Homebrew asks you to trust a third-party tap once before it loads its
