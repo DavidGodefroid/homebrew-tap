@@ -40,7 +40,7 @@ class Lockfamily < Formula
     assert_equal "lox #{lox.version}", shell_output("#{lox.opt_bin}/lox version").strip
     lea = Formula["davidgodefroid/tap/lea"]
     assert_equal "v#{lea.version}", shell_output("#{lea.opt_bin}/lea version").strip
-    assert_path_exists Formula["cosign"].opt_bin/"cosign"
+    assert_path_exists formula_opt_bin("cosign")/"cosign"
     assert_match "lox", (pkgshare/"components").read
   end
 end

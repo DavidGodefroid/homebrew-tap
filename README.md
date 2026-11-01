@@ -35,7 +35,7 @@ installation).
 
 ## How bumps happen
 
-[`scripts/bump.sh`](scripts/bump.sh) rewrites one formula for a release:
+[`scripts/bump`](scripts/bump) rewrites one formula for a release:
 
 1. it downloads the release's `checksums.txt` and checks with cosign that it
    was signed by the project's release workflow run for that very tag;
@@ -57,8 +57,8 @@ fast-forwards `main`. It starts:
 Locally (needs curl and cosign):
 
 ```sh
-scripts/bump.sh --dry-run locksql v0.12.0   # prints the diff only
-scripts/bump.sh locksql v0.12.0             # rewrites Formula/locksql.rb
+scripts/bump --dry-run locksql v0.12.0   # prints the diff only
+scripts/bump locksql v0.12.0             # rewrites Formula/locksql.rb
 ```
 
 ## License

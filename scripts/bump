@@ -1,7 +1,7 @@
 #!/bin/sh
 # Bumps one formula of the tap to a published release of its project.
 #
-#   scripts/bump.sh [--dry-run] FORMULA VERSION
+#   scripts/bump [--dry-run] FORMULA VERSION
 #
 # FORMULA is lox, lea, locksql, lockmq, lockfile, lockhttp or locklog;
 # VERSION is the release, X.Y.Z or vX.Y.Z.
@@ -28,7 +28,7 @@ set -eu
 say() { printf 'bump: %s\n' "$*" >&2; }
 die() { say "$*"; exit 1; }
 usage() {
-	printf 'usage: scripts/bump.sh [--dry-run] FORMULA VERSION\n' >&2
+	printf 'usage: scripts/bump [--dry-run] FORMULA VERSION\n' >&2
 	exit 2
 }
 

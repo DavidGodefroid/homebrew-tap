@@ -30,7 +30,7 @@ class Lockmq < Formula
     # lockmq runs in Docker: the host command is the launcher, as
     # scripts/install.sh installs it. It runs the release images by the
     # digests below, verified with cosign when the formula was bumped
-    # (scripts/bump.sh). The binary of the archive is the one of the image.
+    # (scripts/bump). The binary of the archive is the one of the image.
     image_digest = "sha256:fb60fc527aa49b2d7b326056aae8f232dd88fdb7137d709f670d47c6e0ab369d"
     vault_image_digest = "sha256:a2213db88b60be61d4f9c003ce28afb2be549f202921ecbe374d0a321bfeaf02"
     inreplace "scripts/lockmq" do |s|

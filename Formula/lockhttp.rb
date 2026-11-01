@@ -30,7 +30,7 @@ class Lockhttp < Formula
     # lockhttp runs in Docker: the host command is the launcher, as
     # scripts/install.sh installs it. It runs the release image by the
     # digest below, verified with cosign when the formula was bumped
-    # (scripts/bump.sh). The binary of the archive is the one of the image.
+    # (scripts/bump). The binary of the archive is the one of the image.
     image_digest = "sha256:dfb204742b5fa9f8b166bf64866b909ee65292b6afa8ff5fd5496042e6f8fca6"
     inreplace "scripts/lockhttp" do |s|
       s.gsub!(/^launcher_version=dev$/, "launcher_version=#{version}")

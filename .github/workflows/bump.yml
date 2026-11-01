@@ -5,7 +5,7 @@ name: bump
 #   - from a project's release workflow: a repository_dispatch of type
 #     "bump" with the payload {"formula": "...", "version": "vX.Y.Z"},
 #     sent with a token allowed to dispatch to this repository only.
-# scripts/bump.sh rewrites the formula from the release's signed
+# scripts/bump rewrites the formula from the release's signed
 # checksums.txt (and verified image digests); the result is pushed to a bump
 # branch, tested by tests.yml, then fast-forwarded onto main. Commits are made
 # with this repository's GITHUB_TOKEN.
@@ -54,10 +54,10 @@ jobs:
         with:
           cosign-release: v3.0.6
 
-      # bump.sh checks FORMULA and VERSION against fixed patterns before
+      # scripts/bump checks FORMULA and VERSION against fixed patterns before
       # using them, as they may come from a dispatch payload.
       - name: Rewrite the formula
-        run: scripts/bump.sh "$FORMULA" "$VERSION"
+        run: scripts/bump "$FORMULA" "$VERSION"
 
       - name: Commit to a bump branch
         id: commit

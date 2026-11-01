@@ -30,7 +30,7 @@ class Locksql < Formula
     # locksql runs in Docker: the host command is the launcher, as
     # scripts/install.sh installs it. It runs the release images by the
     # digests below, verified with cosign when the formula was bumped
-    # (scripts/bump.sh). The binary of the archive is the one of the image.
+    # (scripts/bump). The binary of the archive is the one of the image.
     image_digest = "sha256:fe034b3f550dafd2da99af15f4bc0920d2eb1c111d3c2fa84818411925fea6c7"
     vault_image_digest = "sha256:78d963a864c7354c02a83f6584aa1b1e5ce2401556699b45979478a078296f2c"
     inreplace "scripts/locksql" do |s|
