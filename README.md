@@ -4,9 +4,14 @@ Homebrew formulas of the [Lock Family](https://github.com/DavidGodefroid/lockfam
 for macOS and Linux (Homebrew on Linux).
 
 ```sh
+brew trust davidgodefroid/tap
 brew install davidgodefroid/tap/lockfamily
 lox init
 ```
+
+Homebrew asks you to trust a third-party tap once before it loads its
+formulas. Naming a formula in `brew install` trusts that formula only, not
+its dependencies from the same tap, so trust the whole tap first.
 
 The Lock Family runs in Docker: Docker Engine (Linux) or Docker Desktop
 (macOS) must be installed and running. The formulas install small host

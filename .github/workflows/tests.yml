@@ -76,3 +76,65 @@ jobs:
           lox version
           lea version
           cosign version
+
+  # A user's first install, with Homebrew's default settings: no test-bot
+  # setup and no setup-homebrew action, which both trust the tap for us. The
+  # tap is cloned from GitHub (its default remote, so `brew trust
+  # davidgodefroid/tap` applies to it as it does for a user) and then moved to
+  # the commit under test.
+  fresh-install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      REF: ${{ inputs.ref || github.sha }}
+    steps:
+      - name: Put Homebrew on the PATH and update it
+        run: |
+          if [[ "$RUNNER_OS" == Linux ]]; then
+            echo /home/linuxbrew/.linuxbrew/bin >> "$GITHUB_PATH"
+            export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+          fi
+          unset HOMEBREW_NO_REQUIRE_TAP_TRUST
+          brew update
+          brew --version
+          brew trust
+
+      - name: Tap from GitHub at the commit under test
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+        run: |
+          unset HOMEBREW_NO_REQUIRE_TAP_TRUST
+          brew tap davidgodefroid/tap
+          tap_dir="$(brew --repository davidgodefroid/tap)"
+          git -C "$tap_dir" fetch origin "$REF"
+          git -C "$tap_dir" checkout --force --detach FETCH_HEAD
+          git -C "$tap_dir" log -1 --oneline
+          git -C "$tap_dir" remote get-url origin
+
+      # Fails if Homebrew stops refusing a dependency from an untrusted tap:
+      # then the documented `brew trust` step needs a second look.
+      - name: Without trust, the install is refused
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+        run: |
+          unset HOMEBREW_NO_REQUIRE_TAP_TRUST
+          if brew install davidgodefroid/tap/lockfamily > untrusted.log 2>&1; then
+            cat untrusted.log
+            echo "::error::lockfamily installed from an untrusted tap"
+            exit 1
+          fi
+          cat untrusted.log
+          grep -q "from untrusted tap davidgodefroid/tap" untrusted.log
+
+      - name: Trust the tap and install, as the README says
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+        run: |
+          unset HOMEBREW_NO_REQUIRE_TAP_TRUST
+          brew trust davidgodefroid/tap
+          brew install davidgodefroid/tap/lockfamily
+          lox version
+          lea version
