@@ -15,12 +15,16 @@ on:
         description: Commit or branch of the tap to test (default the triggering commit)
         type: string
         default: ""
+      os:
+        description: JSON list of runners (default Linux and macOS, Linux only on a pull request)
+        type: string
+        default: ""
 
 permissions:
   contents: read
 
 concurrency:
-  group: tests-${{ github.workflow_ref }}-${{ inputs.ref || github.ref }}
+  group: tests-${{ github.workflow_ref }}-${{ inputs.ref || github.ref }}-${{ inputs.os }}
   cancel-in-progress: true
 
 defaults:
@@ -32,7 +36,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        # macOS does not run on pull requests: hosted macOS runners are too
+        # often not acquired to gate a PR. bump.yml picks the runners itself.
+        os: ${{ inputs.os != '' && fromJSON(inputs.os) || github.event_name == 'pull_request' && fromJSON('["ubuntu-latest"]') || fromJSON('["ubuntu-latest","macos-latest"]') }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Homebrew
@@ -86,7 +92,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        # macOS does not run on pull requests: hosted macOS runners are too
+        # often not acquired to gate a PR. bump.yml picks the runners itself.
+        os: ${{ inputs.os != '' && fromJSON(inputs.os) || github.event_name == 'pull_request' && fromJSON('["ubuntu-latest"]') || fromJSON('["ubuntu-latest","macos-latest"]') }}
     runs-on: ${{ matrix.os }}
     env:
       REF: ${{ inputs.ref || github.sha }}
