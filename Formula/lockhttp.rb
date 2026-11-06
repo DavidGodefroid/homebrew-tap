@@ -1,5 +1,5 @@
 class Lockhttp < Formula
-  desc "Human-approved HTTP(S) egress proxy for AI agents"
+  desc "Harness security for AI agents: approved HTTP(S) egress proxy"
   homepage "https://github.com/DavidGodefroid/lockhttp"
   license "Apache-2.0"
 

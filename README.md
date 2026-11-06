@@ -1,6 +1,6 @@
 # homebrew-tap
 
-Homebrew formulas of the [Lock Family](https://github.com/DavidGodefroid/lockfamily),
+Homebrew formulas of the [Lock Family](https://github.com/DavidGodefroid/lockfamily), harness security for AI agents,
 for macOS and Linux (Homebrew on Linux).
 
 ```sh

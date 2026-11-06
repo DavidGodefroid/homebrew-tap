@@ -1,5 +1,5 @@
 class Lockmq < Formula
-  desc "Human-approved, PII-masking RabbitMQ gateway for AI agents"
+  desc "Harness security for AI agents on RabbitMQ, with masked queue reads"
   homepage "https://github.com/DavidGodefroid/lockmq"
   license "Apache-2.0"
 
