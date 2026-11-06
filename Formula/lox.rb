@@ -1,5 +1,5 @@
 class Lox < Formula
-  desc "Host CLI of lockhub, the approval hub of the Lock Family"
+  desc "Harness security for AI agents: lockhub's CLI, where approvals live"
   homepage "https://github.com/DavidGodefroid/lockhub"
   license "Apache-2.0"
 

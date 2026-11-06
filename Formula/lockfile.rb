@@ -1,5 +1,5 @@
 class Lockfile < Formula
-  desc "Lets AI agents ask yes/no questions about files they never read"
+  desc "Harness security for AI agents: yes/no questions about unread files"
   homepage "https://github.com/DavidGodefroid/lockfile"
   license "Apache-2.0"
 

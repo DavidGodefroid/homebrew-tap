@@ -1,5 +1,5 @@
 class Locksql < Formula
-  desc "Human-approved, PII-masking database gateway for AI agents"
+  desc "Harness security for AI agents on SQL databases, with PII masking"
   homepage "https://github.com/DavidGodefroid/locksql"
   license "Apache-2.0"
 

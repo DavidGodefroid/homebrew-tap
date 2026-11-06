@@ -1,5 +1,5 @@
 class Lockfamily < Formula
-  desc "Meta formula installing the whole Lock Family toolset for AI agents"
+  desc "Harness security for AI agents: the whole Lock Family toolset"
   homepage "https://github.com/DavidGodefroid/lockfamily"
   # Nothing to build: the formula only pulls in its dependencies. The archive
   # is a fixed commit of the lockfamily repository, which has no release.
