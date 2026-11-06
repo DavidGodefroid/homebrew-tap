@@ -51,9 +51,8 @@ version=${2#v}
 case "$formula" in
 lox) repo=lockhub images=none ;;
 lea) repo=lea images=none ;;
-locksql | lockmq | lockfile) repo=$formula images=vault ;;
+locksql | lockmq | lockfile | locklog) repo=$formula images=vault ;;
 lockhttp) repo=$formula images=image ;;
-locklog) repo=$formula images=image ;;
 *) die "unknown formula '$formula': lox, lea, locksql, lockmq, lockfile, lockhttp or locklog" ;;
 esac
 # Only a release version: it goes into URLs and into the formula's text.

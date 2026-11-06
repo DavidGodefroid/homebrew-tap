@@ -27,13 +27,15 @@ class Locklog < Formula
 
   def install
     # locklog runs in Docker: the host command is the launcher, as
-    # scripts/install.sh installs it. It runs the release image by the
-    # digest below, verified with cosign when the formula was bumped
+    # scripts/install.sh installs it. It runs the release images by the
+    # digests below, verified with cosign when the formula was bumped
     # (scripts/bump). The binary of the archive is the one of the image.
     image_digest = "sha256:8b9730e2b4584604862c697214e4cd51350c2c07ac8d71d1b3d6851d32a771c2"
+    vault_image_digest = "sha256:20fd9a38eefd29a6e0b9e2b8fd36657367f76440509c28c053bd1ce71011dc95"
     inreplace "scripts/locklog" do |s|
       s.gsub!(/^launcher_version=dev$/, "launcher_version=#{version}")
       s.gsub!(/^image_digest=$/, "image_digest=#{image_digest}")
+      s.gsub!(/^vault_image_digest=$/, "vault_image_digest=#{vault_image_digest}")
     end
     bin.install "scripts/locklog"
   end
