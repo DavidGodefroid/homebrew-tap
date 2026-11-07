@@ -8,23 +8,23 @@ class Lea < Formula
     depends_on "tmux"
 
     on_arm do
-      url "https://github.com/DavidGodefroid/lea/releases/download/v0.11.0/lea_0.11.0_darwin_arm64.tar.gz"
-      sha256 "0e407219113ad769a476459c09f4587c68135462c26a88ca6024e5d336ed9da4"
+      url "https://github.com/DavidGodefroid/lea/releases/download/v0.12.0/lea_0.12.0_darwin_arm64.tar.gz"
+      sha256 "9e7c012deda19546f8b745eedcfbd185082e65bba7e3143d162307c5aeff4012"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lea/releases/download/v0.11.0/lea_0.11.0_darwin_amd64.tar.gz"
-      sha256 "35864feab763b74680ca347cab1bea645fc77dc9a81c088e0bb389a69db0a306"
+      url "https://github.com/DavidGodefroid/lea/releases/download/v0.12.0/lea_0.12.0_darwin_amd64.tar.gz"
+      sha256 "dbc5b24c225c93c4c5d22550ce0b548fa68f9f5dede7a470f528e0ff9e8e5727"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/lea/releases/download/v0.11.0/lea_0.11.0_linux_arm64.tar.gz"
-      sha256 "2af9fd7228d5a48aa821d8342812a96c29037f86e23277baecde51c281533c14"
+      url "https://github.com/DavidGodefroid/lea/releases/download/v0.12.0/lea_0.12.0_linux_arm64.tar.gz"
+      sha256 "3ea67b52ec7ac7e5d5db83653f74a32c0fd8d6f2e5b2730a0826527219a988bb"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lea/releases/download/v0.11.0/lea_0.11.0_linux_amd64.tar.gz"
-      sha256 "b16273bd64de7fd057646e664695c729391ccf75f2e5bc8f6ed5032e153b5b91"
+      url "https://github.com/DavidGodefroid/lea/releases/download/v0.12.0/lea_0.12.0_linux_amd64.tar.gz"
+      sha256 "e60da6adc5fc1182b120e2073b46353792a78b13805a4e7eeda0785586a47a89"
     end
   end
 
