@@ -5,23 +5,23 @@ class Lockhttp < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.8.0/lockhttp_0.8.0_darwin_arm64.tar.gz"
-      sha256 "a5d5ec0a4a667939bbbb78565dc2172a7af1cc508d9b9e48992949e1b7e6cdf3"
+      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.8.1/lockhttp_0.8.1_darwin_arm64.tar.gz"
+      sha256 "4a2c5f65e3dfa1b4f21b54cc737b252b7420e4ebf570c2de9b87d3b401b2fa84"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.8.0/lockhttp_0.8.0_darwin_amd64.tar.gz"
-      sha256 "1e8ac2d452b5f8474ea97cc98b582f4fc7e378040c2d05af7e80cfc7c0775f07"
+      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.8.1/lockhttp_0.8.1_darwin_amd64.tar.gz"
+      sha256 "27dea381126138c63275ac4eb6672f096c097133e5f3a9e97ae4c0385e26bf93"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.8.0/lockhttp_0.8.0_linux_arm64.tar.gz"
-      sha256 "f7daf9b7e2887ad8c85a4a4ae32b275b35afbef35b32c9f8fdfca014a452382e"
+      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.8.1/lockhttp_0.8.1_linux_arm64.tar.gz"
+      sha256 "ec36919efc2a16cdc99660b57d7f3877a912176c865e26cdb7fbe302a65ce918"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.8.0/lockhttp_0.8.0_linux_amd64.tar.gz"
-      sha256 "3f976bdd086edc4e26671522bda6d1360678ff464e234db23ad6c4eaa8fcdc1e"
+      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.8.1/lockhttp_0.8.1_linux_amd64.tar.gz"
+      sha256 "1cbd3896100fb66f983dbdd0632508a2755ef8ec5ae0a7334f3889351e34e99f"
     end
   end
 
@@ -30,7 +30,7 @@ class Lockhttp < Formula
     # scripts/install.sh installs it. It runs the release image by the
     # digest below, verified with cosign when the formula was bumped
     # (scripts/bump). The binary of the archive is the one of the image.
-    image_digest = "sha256:e1b0cbe3dd51b119c9aa04e02725749cda67f054d808c265fbc310ed3aed9708"
+    image_digest = "sha256:f60da7464f61d564c6f5c7040f087845f5767e97f14670d28f2c05219d2ff270"
     inreplace "scripts/lockhttp" do |s|
       s.gsub!(/^launcher_version=dev$/, "launcher_version=#{version}")
       s.gsub!(/^image_digest=$/, "image_digest=#{image_digest}")
