@@ -11,17 +11,17 @@ class Lockfamily < Formula
   depends_on "cosign"
   depends_on "davidgodefroid/tap/lea"
   depends_on "davidgodefroid/tap/lockhttp"
+  depends_on "davidgodefroid/tap/locklog"
   depends_on "davidgodefroid/tap/lockmq"
   depends_on "davidgodefroid/tap/locksql"
   depends_on "davidgodefroid/tap/lox"
-  # locklog: no published release yet; added here with its first release.
 
   on_linux do
     depends_on "davidgodefroid/tap/lockfile"
   end
 
   def install
-    components = %w[lox lea locksql lockmq lockhttp cosign]
+    components = %w[lox lea locksql lockmq lockhttp locklog cosign]
     components << "lockfile" if OS.linux?
     (pkgshare/"components").write "#{components.join("\n")}\n"
   end
@@ -33,8 +33,8 @@ class Lockfamily < Formula
       Next step:
         lea
         lox add locksql
-      Then one `lox add` per source: locksql, lockmq, lockfile or lockhttp. A
-      lock added while lea runs needs `lea stop`, then `lea`.
+      Then one `lox add` per source: locksql, lockmq, lockfile, lockhttp or
+      locklog. A lock added while lea runs needs `lea stop`, then `lea`.
       Without lea: `lox init`, then `lox add <lock>`, then `claude` +
       `lox approve`.
     EOS

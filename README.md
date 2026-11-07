@@ -33,12 +33,11 @@ commands; images are pulled on first use.
 | `lockmq` | the launcher of the RabbitMQ gateway | [lockmq](https://github.com/DavidGodefroid/lockmq) |
 | `lockfile` | the launcher of the file gateway (Linux only) | [lockfile](https://github.com/DavidGodefroid/lockfile) |
 | `lockhttp` | the launcher of the HTTP(S) egress proxy | [lockhttp](https://github.com/DavidGodefroid/lockhttp) |
-
-`locklog` joins the tap with its first published release.
+| `locklog` | the launcher of the log gateway (local sources on Linux only) | [locklog](https://github.com/DavidGodefroid/locklog) |
 
 Each formula installs the archive of a published release, checked against
 the SHA-256 of that release's `checksums.txt`. The launchers (`locksql`,
-`lockmq`, `lockfile`, `lockhttp`) run their release images by digest, as
+`lockmq`, `lockfile`, `lockhttp`, `locklog`) run their release images by digest, as
 their own installers do. Upgrade with `brew upgrade`, not with a tool's own
 `update` command (`lea`'s background self-update is off in a Homebrew
 installation).

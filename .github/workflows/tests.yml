@@ -68,7 +68,7 @@ jobs:
 
       - name: Install and test each formula
         run: |
-          formulas=(lox lea locksql lockmq lockhttp)
+          formulas=(lox lea locksql lockmq lockhttp locklog)
           if [[ "$RUNNER_OS" == Linux ]]; then formulas+=(lockfile); fi
           for f in "${formulas[@]}"; do
             brew install --build-from-source --formula "davidgodefroid/tap/$f"
