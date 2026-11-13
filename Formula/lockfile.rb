@@ -9,23 +9,23 @@ class Lockfile < Formula
   # formula still loads on macOS, as Homebrew requires.
   on_macos do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockfile/releases/download/v0.8.1/lockfile_0.8.1_darwin_arm64.tar.gz"
-      sha256 "a8b7d369d3ff4c564725143f0cc41b2b81ef47d973df438aba6254a5b2ae174d"
+      url "https://github.com/DavidGodefroid/lockfile/releases/download/v0.9.0/lockfile_0.9.0_darwin_arm64.tar.gz"
+      sha256 "31c17076211331fc36cc9c03636626a42839d2fd0ed2df7abbbc67dfe858ed0a"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockfile/releases/download/v0.8.1/lockfile_0.8.1_darwin_amd64.tar.gz"
-      sha256 "1bcf584b5ef47676a5167b3fa1c25f537efb2df2c11f8881f1e3a5ee5e22cbd0"
+      url "https://github.com/DavidGodefroid/lockfile/releases/download/v0.9.0/lockfile_0.9.0_darwin_amd64.tar.gz"
+      sha256 "f44d107e50c8c180690f22ed0b3df1ae35217b6d3d42332db0ae3c5612e1bff5"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockfile/releases/download/v0.8.1/lockfile_0.8.1_linux_arm64.tar.gz"
-      sha256 "7c909c390cfb248a5949f047d3f655745ffb4aa5e51ded60a3bf5919aef20223"
+      url "https://github.com/DavidGodefroid/lockfile/releases/download/v0.9.0/lockfile_0.9.0_linux_arm64.tar.gz"
+      sha256 "d8e5a0adf96789a8eff5bc7ef53777eddcd0e00e3c5183366476a1170a7e0e33"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockfile/releases/download/v0.8.1/lockfile_0.8.1_linux_amd64.tar.gz"
-      sha256 "8489752e6a80eb88a8aaedf9b0e7c9e08c363dcccaee9604458c537e722c0479"
+      url "https://github.com/DavidGodefroid/lockfile/releases/download/v0.9.0/lockfile_0.9.0_linux_amd64.tar.gz"
+      sha256 "e57d773933477c3c9b5fd36886abb5dd0713dcc522d70d82c41f7dfccee7a0c9"
     end
   end
 
@@ -35,8 +35,8 @@ class Lockfile < Formula
     # console's container. It runs the release images by the digests below,
     # verified with cosign when the formula was bumped (scripts/bump).
     # The binary of the archive is the one of the image.
-    image_digest = "sha256:7c7efa5a10ddce1ebccca08ad3af9404337554bfb510e12f08957bef4aee3a13"
-    vault_image_digest = "sha256:c65508652955c811bd5b85db75cff96fb0f2331c9c8f2629c9dcb26e5c24395a"
+    image_digest = "sha256:efdf346c57b5cccb4e041d741f3eb3aa471339333966398e98f877b3209bd046"
+    vault_image_digest = "sha256:3b96cd94d0d79afaae6d57af98f0283f1a0931f094df343270334e924df0ed86"
     inreplace "scripts/lockfile" do |s|
       s.gsub!(/^launcher_version=dev$/, "launcher_version=#{version}")
       s.gsub!(/^image_digest=$/, "image_digest=#{image_digest}")
