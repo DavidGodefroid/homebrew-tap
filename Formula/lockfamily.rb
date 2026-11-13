@@ -7,6 +7,7 @@ class Lockfamily < Formula
   version "0.1.0"
   sha256 "a2d3717a06e00276ad26aefb902783a72aaac827929f4353311f54e8105c6f87"
   license "Apache-2.0"
+  revision 1
 
   depends_on "cosign"
   depends_on "davidgodefroid/tap/lea"
@@ -14,6 +15,7 @@ class Lockfamily < Formula
   depends_on "davidgodefroid/tap/locklog"
   depends_on "davidgodefroid/tap/lockmq"
   depends_on "davidgodefroid/tap/locksql"
+  depends_on "davidgodefroid/tap/lockssh"
   depends_on "davidgodefroid/tap/lox"
 
   on_linux do
@@ -21,7 +23,7 @@ class Lockfamily < Formula
   end
 
   def install
-    components = %w[lox lea locksql lockmq lockhttp locklog cosign]
+    components = %w[lox lea locksql lockmq lockhttp locklog lockssh cosign]
     components << "lockfile" if OS.linux?
     (pkgshare/"components").write "#{components.join("\n")}\n"
   end
@@ -33,9 +35,9 @@ class Lockfamily < Formula
       Next step:
         lea
         lox add locksql
-      Then one `lox add` per source: locksql, lockmq, lockfile, lockhttp or
-      locklog. A lock added while lea runs needs `lea stop`, then `lea`.
-      Without lea: `lox init`, then `lox add <lock>`, then `claude` +
+      Then one `lox add` per source: locksql, lockmq, lockfile, lockhttp,
+      locklog or lockssh. A lock added while lea runs needs `lea stop`, then
+      `lea`. Without lea: `lox init`, then `lox add <lock>`, then `claude` +
       `lox approve`.
     EOS
   end
@@ -46,6 +48,8 @@ class Lockfamily < Formula
     lea = Formula["davidgodefroid/tap/lea"]
     assert_equal "v#{lea.version}", shell_output("#{lea.opt_bin}/lea version").strip
     assert_path_exists formula_opt_bin("cosign")/"cosign"
+    assert_path_exists Formula["davidgodefroid/tap/lockssh"].opt_bin/"lockssh"
     assert_match "lox", (pkgshare/"components").read
+    assert_match "lockssh", (pkgshare/"components").read
   end
 end
