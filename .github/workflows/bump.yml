@@ -17,7 +17,7 @@ on:
         description: Formula to bump
         required: true
         type: choice
-        options: [lox, lea, locksql, lockmq, lockfile, lockhttp, locklog]
+        options: [lox, lea, locksql, lockmq, lockfile, lockhttp, locklog, lockssh]
       version:
         description: Release version (X.Y.Z or vX.Y.Z)
         required: true
