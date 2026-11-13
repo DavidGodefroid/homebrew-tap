@@ -3,7 +3,8 @@
 #
 #   scripts/bump [--dry-run] FORMULA VERSION
 #
-# FORMULA is lox, lea, locksql, lockmq, lockfile, lockhttp or locklog;
+# FORMULA is lox, lea, locksql, lockmq, lockfile, lockhttp, locklog or
+# lockssh;
 # VERSION is the release, X.Y.Z or vX.Y.Z.
 #
 # It downloads the release's checksums.txt and its Sigstore bundle, checks
@@ -51,9 +52,9 @@ version=${2#v}
 case "$formula" in
 lox) repo=lockhub images=none ;;
 lea) repo=lea images=none ;;
-locksql | lockmq | lockfile | locklog) repo=$formula images=vault ;;
+locksql | lockmq | lockfile | locklog | lockssh) repo=$formula images=vault ;;
 lockhttp) repo=$formula images=image ;;
-*) die "unknown formula '$formula': lox, lea, locksql, lockmq, lockfile, lockhttp or locklog" ;;
+*) die "unknown formula '$formula': lox, lea, locksql, lockmq, lockfile, lockhttp, locklog or lockssh" ;;
 esac
 # Only a release version: it goes into URLs and into the formula's text.
 printf '%s\n' "$version" | grep -Eqx '[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?' ||
