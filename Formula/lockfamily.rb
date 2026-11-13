@@ -48,7 +48,7 @@ class Lockfamily < Formula
     lea = Formula["davidgodefroid/tap/lea"]
     assert_equal "v#{lea.version}", shell_output("#{lea.opt_bin}/lea version").strip
     assert_path_exists formula_opt_bin("cosign")/"cosign"
-    assert_path_exists Formula["davidgodefroid/tap/lockssh"].opt_bin/"lockssh"
+    assert_path_exists formula_opt_bin("davidgodefroid/tap/lockssh")/"lockssh"
     assert_match "lox", (pkgshare/"components").read
     assert_match "lockssh", (pkgshare/"components").read
   end
