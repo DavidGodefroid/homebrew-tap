@@ -5,23 +5,23 @@ class Lockmq < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockmq/releases/download/v0.8.1/lockmq_0.8.1_darwin_arm64.tar.gz"
-      sha256 "d5c255be346a8249863751fc275fd3cf7c1ea1930c65f5dde0cd2c0de7e70f56"
+      url "https://github.com/DavidGodefroid/lockmq/releases/download/v0.9.0/lockmq_0.9.0_darwin_arm64.tar.gz"
+      sha256 "1290fd1a03a8c12a44fd79912c8b14c52ae3650e1272e922c2cbe822fd7047ed"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockmq/releases/download/v0.8.1/lockmq_0.8.1_darwin_amd64.tar.gz"
-      sha256 "8fe366cc4c4bef2a92eea47803df83d32f9d0424d3d010952cd562fdca5d1116"
+      url "https://github.com/DavidGodefroid/lockmq/releases/download/v0.9.0/lockmq_0.9.0_darwin_amd64.tar.gz"
+      sha256 "cd7d3a3919c6fd8020b98bf2f27d32b9f11f576f4920d41ce1a8b7836471867d"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockmq/releases/download/v0.8.1/lockmq_0.8.1_linux_arm64.tar.gz"
-      sha256 "b597f2509dc94b894680e63ea1a615431e5ac1d9449da07cc20eaab5592d78ad"
+      url "https://github.com/DavidGodefroid/lockmq/releases/download/v0.9.0/lockmq_0.9.0_linux_arm64.tar.gz"
+      sha256 "8f85b1d4163c8073c320555be08596f075fdbff4c4c217817f8f1a28c97dccbc"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockmq/releases/download/v0.8.1/lockmq_0.8.1_linux_amd64.tar.gz"
-      sha256 "b8c355c8f9d9a369c502638e54999fccf3b4724fd7b3b40421b9607c6720a2cc"
+      url "https://github.com/DavidGodefroid/lockmq/releases/download/v0.9.0/lockmq_0.9.0_linux_amd64.tar.gz"
+      sha256 "06759dc5909a118eb303c61e932570ea645a26fa8b02f8eef62f2dff82afac4c"
     end
   end
 
@@ -30,8 +30,8 @@ class Lockmq < Formula
     # scripts/install.sh installs it. It runs the release images by the
     # digests below, verified with cosign when the formula was bumped
     # (scripts/bump). The binary of the archive is the one of the image.
-    image_digest = "sha256:12035d2da0a97aec6edbac9b48937d4881c4d5709c56bab715d31818850899a2"
-    vault_image_digest = "sha256:34db86434000b3113d4cd2ea8dc931faa06ee2d6b414d66b64105bbb800b21e6"
+    image_digest = "sha256:2757a2481c8102fb885485d8ee10c124c4f04e1da1ac41a71f2f2ab06526bb7d"
+    vault_image_digest = "sha256:09a4737de06b61010ab9fa92caf4a8fcf49730b1aa38b71ae0d6b66592290438"
     inreplace "scripts/lockmq" do |s|
       s.gsub!(/^launcher_version=dev$/, "launcher_version=#{version}")
       s.gsub!(/^image_digest=$/, "image_digest=#{image_digest}")
