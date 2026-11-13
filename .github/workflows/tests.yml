@@ -82,6 +82,7 @@ jobs:
           lox version
           lea version
           cosign version
+          command -v lockssh
 
   # A user's first install, with Homebrew's default settings: no test-bot
   # setup and no setup-homebrew action, which both trust the tap for us. The
@@ -146,3 +147,4 @@ jobs:
           brew install davidgodefroid/tap/lockfamily
           lox version
           lea version
+          command -v lockssh
