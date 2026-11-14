@@ -5,23 +5,23 @@ class Locklog < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/DavidGodefroid/locklog/releases/download/v0.3.1/locklog_0.3.1_darwin_arm64.tar.gz"
-      sha256 "8535a3c68ece8ebfa596a2d554a446cafae2293f13b666e1927582947863840e"
+      url "https://github.com/DavidGodefroid/locklog/releases/download/v0.4.0/locklog_0.4.0_darwin_arm64.tar.gz"
+      sha256 "5bded13ba1b2fc0c8b1349fc08e5300b7482da9a0555571d3c3ab86920b88130"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/locklog/releases/download/v0.3.1/locklog_0.3.1_darwin_amd64.tar.gz"
-      sha256 "91baa589c004347ee70cfd3bc02b4b6282cacdc3685517547f0915cee35c643e"
+      url "https://github.com/DavidGodefroid/locklog/releases/download/v0.4.0/locklog_0.4.0_darwin_amd64.tar.gz"
+      sha256 "b02fc325039018bc32ac86fde8eb2b870f9a5b09751d476e9fcd75113e33e9d2"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/locklog/releases/download/v0.3.1/locklog_0.3.1_linux_arm64.tar.gz"
-      sha256 "259158e2dba7a3180924806c4d6329b67414821d70915501b9eb5da0f1c71c43"
+      url "https://github.com/DavidGodefroid/locklog/releases/download/v0.4.0/locklog_0.4.0_linux_arm64.tar.gz"
+      sha256 "0d66b3f0e7c90c85b91fb44495ab59fed665a71f78e5d06792bf0d517fd5d0cf"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/locklog/releases/download/v0.3.1/locklog_0.3.1_linux_amd64.tar.gz"
-      sha256 "cb6d3959337bfdf9c69ab018a6032b974aba4d8f770aece7e034a9a0d8d3e35a"
+      url "https://github.com/DavidGodefroid/locklog/releases/download/v0.4.0/locklog_0.4.0_linux_amd64.tar.gz"
+      sha256 "32534a436c2c8eb2dceea7844ff9f9a47b9f139b4ee633a1b2ae3d1ee2b3ac07"
     end
   end
 
@@ -30,8 +30,8 @@ class Locklog < Formula
     # scripts/install.sh installs it. It runs the release images by the
     # digests below, verified with cosign when the formula was bumped
     # (scripts/bump). The binary of the archive is the one of the image.
-    image_digest = "sha256:c51fef8eb0893bb2b293908ac00ef04620b706f34c964fdce59c4d4c61306f4c"
-    vault_image_digest = "sha256:d09881ff5911b78c68b7835a29470678d8b220eb8d84b9fb407c254433124f31"
+    image_digest = "sha256:1ab96d06ade5e2ba953855b827ab63dd13f46e67dad0e7eb17cf041716f66094"
+    vault_image_digest = "sha256:685f831cd5ec266b0a000914bd641cebe901f7b97c04e22ef1aa32de46ed351c"
     inreplace "scripts/locklog" do |s|
       s.gsub!(/^launcher_version=dev$/, "launcher_version=#{version}")
       s.gsub!(/^image_digest=$/, "image_digest=#{image_digest}")
