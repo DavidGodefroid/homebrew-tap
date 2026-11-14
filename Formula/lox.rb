@@ -5,23 +5,23 @@ class Lox < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockhub/releases/download/v0.12.0/lox_0.12.0_darwin_arm64.tar.gz"
-      sha256 "7431113228de4bd6b3c6f63d6d793d14dd715195b38839c1bd5dba90927343e7"
+      url "https://github.com/DavidGodefroid/lockhub/releases/download/v0.12.1/lox_0.12.1_darwin_arm64.tar.gz"
+      sha256 "1a14d7b5e5e45a32564ef92a3efac50a4f5537e03fcc665d5978ee52b03f7c60"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockhub/releases/download/v0.12.0/lox_0.12.0_darwin_amd64.tar.gz"
-      sha256 "2570bbd6001aba90a511793ea75e36664217c982d3edb3ee8187a14834d0cbe5"
+      url "https://github.com/DavidGodefroid/lockhub/releases/download/v0.12.1/lox_0.12.1_darwin_amd64.tar.gz"
+      sha256 "831700c007dee7e8ac96818e984c04e93919e199e8a2024e2a64a406640cadc6"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockhub/releases/download/v0.12.0/lox_0.12.0_linux_arm64.tar.gz"
-      sha256 "488f4f4183327b74326691b9c5d5c2b1ed19583e1a9954ef744fc80a961c7410"
+      url "https://github.com/DavidGodefroid/lockhub/releases/download/v0.12.1/lox_0.12.1_linux_arm64.tar.gz"
+      sha256 "5577ba2c55a2eeb264bc9a3faa00b5efc5a83234dc2ce8f8b9bb84ebbd208fe6"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockhub/releases/download/v0.12.0/lox_0.12.0_linux_amd64.tar.gz"
-      sha256 "ad9480ee4a9d2f30ffc2ed33192458148a03215ef211625779591c86e0c57bf5"
+      url "https://github.com/DavidGodefroid/lockhub/releases/download/v0.12.1/lox_0.12.1_linux_amd64.tar.gz"
+      sha256 "3f4bbb11fc99743a80a6b541e7684b1e5ee9b475a60a8b8880a4bb68534175a0"
     end
   end
 
