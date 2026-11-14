@@ -5,32 +5,33 @@ class Lockhttp < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.10.0/lockhttp_0.10.0_darwin_arm64.tar.gz"
-      sha256 "0fc0c4dfa8b2a37ac6cb989c540686150803c6063d9da8735a44ec1952ea7017"
+      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.11.0/lockhttp_0.11.0_darwin_arm64.tar.gz"
+      sha256 "ce7ed50fa5d04f9386f58cabb355817fca626c15cc08c1bd421b736a96fab078"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.10.0/lockhttp_0.10.0_darwin_amd64.tar.gz"
-      sha256 "716c386696b45be9a687019f5751710cc0d0336f93a85e30cbdf53e179d305dc"
+      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.11.0/lockhttp_0.11.0_darwin_amd64.tar.gz"
+      sha256 "308c3cff0eb2a6b71ed541f31ace11a478695cd1b153277f4d4d8b15f0d9bfa4"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.10.0/lockhttp_0.10.0_linux_arm64.tar.gz"
-      sha256 "c798b66d38554f6a4f4f5852f127fbe47ec6f22b8ce3e1940d0a28ebd3819533"
+      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.11.0/lockhttp_0.11.0_linux_arm64.tar.gz"
+      sha256 "686010fb32cbb500af52a801605f82efd4b52dd07d4047e8a16747ffe0d6597d"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.10.0/lockhttp_0.10.0_linux_amd64.tar.gz"
-      sha256 "488bc08d63ff7d988ff99d6c1a54a5257c11cde78e639cdf491b54c28897b354"
+      url "https://github.com/DavidGodefroid/lockhttp/releases/download/v0.11.0/lockhttp_0.11.0_linux_amd64.tar.gz"
+      sha256 "fad76769a912b5fb582695006401d619566726f64ae579b30bbb85eebc8957a3"
     end
   end
 
   def install
-    # lockhttp runs in Docker: the host command is the launcher, as
-    # scripts/install.sh installs it. It runs the release image by the
-    # digest below, verified with cosign when the formula was bumped
-    # (scripts/bump). The binary of the archive is the one of the image.
-    image_digest = "sha256:90d350bc04a9107b93627bd37b99620668eaaeac4cd3497b599581279b2f702b"
+    # lockhttp runs in Docker: the host command is the launcher, as the
+    # Lock Family's installer (https://lockfamily.dev/install.sh) installs it
+    # without Homebrew. It runs the release image by the digest below,
+    # verified with cosign when the formula was bumped (scripts/bump). The
+    # binary of the archive is the one of the image.
+    image_digest = "sha256:e2685b31eac092a79f2e27a365c1ced60f980043f5352bf8076f02e113dea62e"
     inreplace "scripts/lockhttp" do |s|
       s.gsub!(/^launcher_version=dev$/, "launcher_version=#{version}")
       s.gsub!(/^image_digest=$/, "image_digest=#{image_digest}")
