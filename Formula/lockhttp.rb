@@ -26,10 +26,11 @@ class Lockhttp < Formula
   end
 
   def install
-    # lockhttp runs in Docker: the host command is the launcher, as
-    # scripts/install.sh installs it. It runs the release image by the
-    # digest below, verified with cosign when the formula was bumped
-    # (scripts/bump). The binary of the archive is the one of the image.
+    # lockhttp runs in Docker: the host command is the launcher, as the
+    # Lock Family's installer (https://lockfamily.dev/install.sh) installs it
+    # without Homebrew. It runs the release image by the digest below,
+    # verified with cosign when the formula was bumped (scripts/bump). The
+    # binary of the archive is the one of the image.
     image_digest = "sha256:e2685b31eac092a79f2e27a365c1ced60f980043f5352bf8076f02e113dea62e"
     inreplace "scripts/lockhttp" do |s|
       s.gsub!(/^launcher_version=dev$/, "launcher_version=#{version}")
