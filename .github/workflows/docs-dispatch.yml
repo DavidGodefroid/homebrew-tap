@@ -1,0 +1,37 @@
+name: docs-dispatch
+
+# lockfamily.dev/docs is built by lockfamily's docs-site/build.py from this
+# repository's README.md (its Homebrew tap page), and from CHANGELOG.md,
+# GUIDE.md and docs/** should they appear. Its pages workflow rebuilds every
+# night; this dispatch makes a docs change or a release show within minutes
+# instead.
+#
+# Formula/** is not watched: the site renders no formula file, and bumps are
+# pushed onto main by bump.yml with GITHUB_TOKEN, which starts no workflow
+# anyway. Should the site ever render formula versions, send this same
+# dispatch from a last step of bump.yml's publish job.
+
+on:
+  push:
+    branches: [main]
+    paths: [README.md, CHANGELOG.md, GUIDE.md, "docs/**"]
+  release:
+    types: [published]
+
+permissions: {}
+
+jobs:
+  dispatch:
+    name: dispatch
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      # LOCKFAMILY_DOCS_TOKEN: a fine-grained token limited to
+      # DavidGodefroid/lockfamily, Contents read and write (lockfamily#39).
+      # Without it the nightly build still picks the change up.
+      - name: dispatch to lockfamily
+        env:
+          GH_TOKEN: ${{ secrets.LOCKFAMILY_DOCS_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then echo "::notice::LOCKFAMILY_DOCS_TOKEN not set"; exit 0; fi
+          gh api repos/DavidGodefroid/lockfamily/dispatches -f event_type=docs

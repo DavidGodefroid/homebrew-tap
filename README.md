@@ -71,6 +71,15 @@ scripts/bump --dry-run locksql v0.12.0   # prints the diff only
 scripts/bump locksql v0.12.0             # rewrites Formula/locksql.rb
 ```
 
+## Contributing
+
+Docs are published at [lockfamily.dev/docs](https://lockfamily.dev/docs/)
+from this repo's Markdown: this README is the Homebrew tap page. Adding a
+file under `docs/`, or renaming or removing a README H2 section, needs a
+matching change to
+[lockfamily's `docs-site/nav.toml`](https://github.com/DavidGodefroid/lockfamily/blob/main/docs-site/nav.toml):
+open a lockfamily PR, or the nightly docs build fails.
+
 ## License
 
 The formulas are under the Apache License 2.0, like the projects they install.
