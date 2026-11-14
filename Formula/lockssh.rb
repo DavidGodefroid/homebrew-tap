@@ -5,23 +5,23 @@ class Lockssh < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockssh/releases/download/v0.2.1/lockssh_0.2.1_darwin_arm64.tar.gz"
-      sha256 "f6edc29ab0eaabf6de7e7ba851b9761a14f2ec809d13eded836d79b2de9d8d10"
+      url "https://github.com/DavidGodefroid/lockssh/releases/download/v0.3.0/lockssh_0.3.0_darwin_arm64.tar.gz"
+      sha256 "51e0578468f6bbfe16e99f0def788c677b6879624160601713faacfc4da6b761"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockssh/releases/download/v0.2.1/lockssh_0.2.1_darwin_amd64.tar.gz"
-      sha256 "baec38da42583971760a20b5c32898bbe158d743e24d2c6c8aa58bf6d368e9fd"
+      url "https://github.com/DavidGodefroid/lockssh/releases/download/v0.3.0/lockssh_0.3.0_darwin_amd64.tar.gz"
+      sha256 "64f0eb0900aeb727a0b930bd7324bea63a29c5668dd67637c31efa94d408d14c"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/DavidGodefroid/lockssh/releases/download/v0.2.1/lockssh_0.2.1_linux_arm64.tar.gz"
-      sha256 "263997715063444750ab57812c945bf600384dc2b57f1687940a381593b9ed29"
+      url "https://github.com/DavidGodefroid/lockssh/releases/download/v0.3.0/lockssh_0.3.0_linux_arm64.tar.gz"
+      sha256 "36818cce7940b4207f3836d60d6e2ed8f3c8ac87c9fae51ef5e567ba5b0a3987"
     end
     on_intel do
-      url "https://github.com/DavidGodefroid/lockssh/releases/download/v0.2.1/lockssh_0.2.1_linux_amd64.tar.gz"
-      sha256 "facd18fcb5e1924fdc25dc9b779cd5a4981a6831f4be9e6165194efd47e6fb35"
+      url "https://github.com/DavidGodefroid/lockssh/releases/download/v0.3.0/lockssh_0.3.0_linux_amd64.tar.gz"
+      sha256 "7d20fdda269a2d6e2760a772a0de749bee0e002abc85ac2846b21380ce7348aa"
     end
   end
 
@@ -30,8 +30,8 @@ class Lockssh < Formula
     # scripts/install.sh installs it. It runs the release images by the
     # digests below, verified with cosign when the formula was bumped
     # (scripts/bump). The binary of the archive is the one of the image.
-    image_digest = "sha256:836a42f001eb279880a63458f61d7bb92b692c63c96ae09328e9c29077cca35e"
-    vault_image_digest = "sha256:a48fc7fd9870dbac01e50c3443cd3cc2ebc05b2d97fddda770c33412d69ad36f"
+    image_digest = "sha256:f0ea17672943a7bdf8ba6765f0ec8c83c4adbf26a41752abc572344145940312"
+    vault_image_digest = "sha256:63cac65fdfbd97d02bfe1c2472112cc90db4837dd715a527645e5e226d9dd3c9"
     inreplace "scripts/lockssh" do |s|
       s.gsub!(/^launcher_version=dev$/, "launcher_version=#{version}")
       s.gsub!(/^image_digest=$/, "image_digest=#{image_digest}")
