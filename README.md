@@ -10,9 +10,11 @@ lea
 lox add locksql
 ```
 
-A lock added while lea runs reaches it after `lea stop`, then `lea`.
+Run `lox add` and `lox run` in lea's projects directory. A lock added while
+lea runs reaches it after `lea stop`, then `lea`.
 
-Without lea: `lox init`, then `lox add <lock>`, then `claude` + `lox approve`.
+Without lea: `lox add <lock>` in your project, `lox run` in a terminal of its
+own (approvals live there), and your agent (`claude`, `codex`, …) in another.
 
 Homebrew asks you to trust a third-party tap once before it loads its
 formulas. Naming a formula in `brew install` trusts that formula only, not
@@ -28,7 +30,7 @@ commands; images are pulled on first use.
 |---|---|---|
 | `lockfamily` | all of the below, plus `cosign` (homebrew-core) | [lockfamily](https://github.com/DavidGodefroid/lockfamily) |
 | `lox` | the host CLI of the approval hub | [lockhub](https://github.com/DavidGodefroid/lockhub) |
-| `lea` | many Claude Code agents in containers | [lea](https://github.com/DavidGodefroid/lea) |
+| `lea` | many AI agents (Claude Code, Codex, …) in containers | [lea](https://github.com/DavidGodefroid/lea) |
 | `locksql` | the launcher of the database gateway | [locksql](https://github.com/DavidGodefroid/locksql) |
 | `lockmq` | the launcher of the RabbitMQ gateway | [lockmq](https://github.com/DavidGodefroid/lockmq) |
 | `lockfile` | the launcher of the file gateway (Linux only) | [lockfile](https://github.com/DavidGodefroid/lockfile) |
@@ -36,10 +38,13 @@ commands; images are pulled on first use.
 | `locklog` | the launcher of the log gateway (local sources on Linux only) | [locklog](https://github.com/DavidGodefroid/locklog) |
 | `lockssh` | the launcher of the SSH command gateway | [lockssh](https://github.com/DavidGodefroid/lockssh) |
 
-Each formula installs the archive of a published release, checked against
-the SHA-256 of that release's `checksums.txt`. The launchers (`locksql`,
-`lockmq`, `lockfile`, `lockhttp`, `locklog`, `lockssh`) run their release images by
-digest, as their own installers do. Upgrade with `brew upgrade`, not with a tool's own
+Each tool formula installs the archive of a published release, checked
+against the SHA-256 of that release's `checksums.txt`. The `lockfamily` meta
+formula installs nothing of its own: its archive is a fixed commit of the
+lockfamily repository, which has no release. The launchers (`locksql`,
+`lockmq`, `lockfile`, `lockhttp`, `locklog`, `lockssh`) run their release
+images by a digest pinned at bump time, as their own install scripts do
+(lockhttp has none: it installs with Homebrew or lockfamily's `install.sh`). Upgrade with `brew upgrade`, not with a tool's own
 `update` command (`lea`'s background self-update is off in a Homebrew
 installation).
 
