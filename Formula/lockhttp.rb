@@ -43,6 +43,9 @@ class Lockhttp < Formula
     <<~EOS
       lockhttp runs in Docker: Docker Engine (Linux) or Docker Desktop (macOS)
       must be installed and running.
+      lockhttp needs lea, and `lox add` and `lox run` need lox and cosign 2.5
+      or later:
+        brew install davidgodefroid/tap/lea davidgodefroid/tap/lox cosign
       Next step:
         lox add lockhttp
       (with lea: run lea first; it starts the hub)

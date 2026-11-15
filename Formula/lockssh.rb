@@ -44,6 +44,8 @@ class Lockssh < Formula
     <<~EOS
       lockssh runs in Docker: Docker Engine (Linux) or Docker Desktop (macOS)
       must be installed and running.
+      `lox add` and `lox run` need lox and cosign 2.5 or later:
+        brew install davidgodefroid/tap/lox cosign
       Next step:
         lox add lockssh
       (with lea: run lea first; it starts the hub)
