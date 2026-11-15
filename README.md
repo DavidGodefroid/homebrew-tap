@@ -35,7 +35,7 @@ commands; images are pulled on first use.
 | `lockmq` | the launcher of the RabbitMQ gateway | [lockmq](https://github.com/DavidGodefroid/lockmq) |
 | `lockfile` | the launcher of the file gateway (Linux only) | [lockfile](https://github.com/DavidGodefroid/lockfile) |
 | `lockhttp` | the launcher of the HTTP(S) egress proxy | [lockhttp](https://github.com/DavidGodefroid/lockhttp) |
-| `locklog` | the launcher of the log gateway (local sources on Linux only) | [locklog](https://github.com/DavidGodefroid/locklog) |
+| `locklog` | the launcher of the log gateway (a Linux host with the logs) | [locklog](https://github.com/DavidGodefroid/locklog) |
 | `lockssh` | the launcher of the SSH command gateway | [lockssh](https://github.com/DavidGodefroid/lockssh) |
 
 Each tool formula installs the archive of a published release, checked
@@ -44,7 +44,10 @@ formula installs nothing of its own: its archive is a fixed commit of the
 lockfamily repository, which has no release. The launchers (`locksql`,
 `lockmq`, `lockfile`, `lockhttp`, `locklog`, `lockssh`) run their release
 images by a digest pinned at bump time, as their own install scripts do
-(lockhttp has none: it installs with Homebrew or lockfamily's `install.sh`). Upgrade with `brew upgrade`, not with a tool's own
+(lockhttp has none: it installs with Homebrew or lockfamily's `install.sh`).
+No launcher formula depends on `lox` or `cosign`: `lox add` and `lox run`
+need both (cosign 2.5 or later), and lockhttp needs `lea` too; the
+`lockfamily` formula brings them all. Upgrade with `brew upgrade`, not with a tool's own
 `update` command (`lea`'s background self-update is off in a Homebrew
 installation).
 

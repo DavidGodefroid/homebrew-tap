@@ -32,12 +32,14 @@ class Lox < Formula
   def caveats
     <<~EOS
       The Lock Family runs in Docker: Docker Engine (Linux) or Docker Desktop
-      (macOS) must be installed and running.
+      (macOS) must be installed and running. `lox add` and `lox run` need
+      cosign 2.5 or later:
+        brew install cosign
       Next step:
         lea
         lox add locksql
-      One `lox add` per source: locksql, lockmq, lockfile or lockhttp. A lock
-      added while lea runs needs `lea stop`, then `lea`.
+      One `lox add` per source: locksql, lockmq, lockfile, lockhttp, locklog
+      or lockssh. A lock added while lea runs needs `lea stop`, then `lea`.
       Without lea: `lox init`, then `lox add <lock>`, then `claude` +
       `lox approve`.
     EOS

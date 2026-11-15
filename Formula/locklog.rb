@@ -42,10 +42,10 @@ class Locklog < Formula
 
   def caveats
     <<~EOS
-      locklog runs in Docker: Docker Engine (Linux) or Docker Desktop (macOS)
-      must be installed and running.
-      macOS reads remote log sources (Loki, Elasticsearch/OpenSearch); local
-      log sources are Linux only.
+      locklog runs on a Linux host with the logs, in Docker 19.03 or later:
+      Docker Engine must be installed and running.
+      `lox add` and `lox run` need lox and cosign 2.5 or later:
+        brew install davidgodefroid/tap/lox cosign
       Next step:
         lox add locklog
       (with lea: run lea first; it starts the hub)
